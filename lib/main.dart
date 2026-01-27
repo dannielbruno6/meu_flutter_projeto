@@ -1,71 +1,71 @@
 import 'package:flutter/material.dart';
 import './questao.dart';
+import './resposta.dart';
 
-main (){
-  runApp( MeuApp());
 
+void main() {
+  runApp(MeuApp());
 }
-var _perguntaselecionada = 0;
 
-
-
-void _responder() {
-  _perguntaselecionada++;
-  print(_perguntaselecionada);
-}
 class MeuApp extends StatefulWidget {
-   MeuApp({super.key});
+  const MeuApp({super.key});
 
   @override
   State<MeuApp> createState() => _MeuAppState();
 }
 
 class _MeuAppState extends State<MeuApp> {
-  final perguntas =[
-  'qual sua cor favorita',
-  'qual seu anunmal favroito',
-];
+
+
+  int _perguntaSelecionada = 0;
+
+  final perguntas = [
+    {
+      'texto': 'Qual sua cor favorita?',
+      'respostas': ['Preto', 'Vermelho', 'Verde', 'Branco'],
+    },
+    {
+      'texto': 'Qual seu animal favorito?',
+      'respostas': ['Coelho', 'Cobra', 'Elefante', 'Leão'],
+    },
+    {
+      'texto': 'Qual seu instrutor favorito?',
+      'respostas': ['Maria', 'João', 'Leo', 'Pedro'],
+    }
+  ];
+
+
+  void _responder() {
+    setState(() {
+
+      _perguntaSelecionada++;
+    });
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.blue,
+          centerTitle: true,
+          title: const Text('PERGUNTAS'),
+        ),
+        body: Column(
+          children: [
+            Questao(perguntas[_perguntaSelecionada]['texto'] as String),
 
-    return MaterialApp(home:
-    Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red,
-        centerTitle: true,
-        title: Text('PERGUNTAS'),
+            // cria os botões de respostas
+            ...(perguntas[_perguntaSelecionada]['respostas'] as List<String>).map(
+                  (resposta) {
+                return Resposta(resposta, _responder);
+              },
+            ).toList(),
+          ],
+        ),
       ),
-      body: Column(
-        children: [
-          Text(perguntas[_perguntaselecionada]),
-          ElevatedButton(
-child: Text('pergunta 1'),
-            onPressed: () {
-              _responder();
-            },
-
-          ),
-ElevatedButton(
-child: Text('pergunta 1'),
-onPressed: () {
-_responder();
-},
-
-),
-ElevatedButton(
-child: Text('pergunta 1'),
-onPressed: () {
-_responder();
-},
-
-),
-
-        ],
-      ),
-
-
-    ),
     );
   }
 }

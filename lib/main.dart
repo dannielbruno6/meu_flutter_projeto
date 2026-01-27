@@ -32,7 +32,7 @@ class _MeuAppState extends State<MeuApp> {
     return MaterialApp(home:
     Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.red,
         centerTitle: true,
         title: Text('PERGUNTAS'),
       ),

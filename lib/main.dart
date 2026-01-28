@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:primeiro_projeto/resultado.dart';
 import './questao.dart';
 import './resposta.dart';
-
+import './resultado.dart';
 void main() {
   runApp(MeuApp());
 }
@@ -69,11 +70,7 @@ class _MeuAppState extends State<MeuApp> {
                       .toList(),
                 ],
               )
-            : Container(
-                child: Center(
-                  child: Text('parabens', style: TextStyle(fontSize: 40)),
-                ),
-              ),
+            : Resultado()
       ),
     );
   }

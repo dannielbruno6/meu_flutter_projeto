@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:primeiro_projeto/resultado.dart';
-import './questao.dart';
-import './resposta.dart';
-import './resultado.dart';
+import './questionario.dart';
+
+
 void main() {
   runApp(MeuApp());
 }
@@ -32,6 +32,10 @@ class _MeuAppState extends State<MeuApp> {
     },
   ];
 
+  bool get temPerguntaSelecionada {
+    return _perguntaSelecionada < _perguntas.length;
+  }
+
   void _responder() {
     setState(() {
       _perguntaSelecionada++;
@@ -39,15 +43,10 @@ class _MeuAppState extends State<MeuApp> {
     print(_perguntaSelecionada);
   }
 
-  bool get temPerguntaSelecionada {
-    return _perguntaSelecionada < _perguntas.length;
-  }
 
   @override
   Widget build(BuildContext context) {
-    List<String> respostas = temPerguntaSelecionada
-        ? (_perguntas[_perguntaSelecionada]['respostas'] as List<String>)
-        : [];
+
 
     return MaterialApp(
       home: Scaffold(
@@ -57,19 +56,9 @@ class _MeuAppState extends State<MeuApp> {
           title: const Text('PERGUNTAS'),
         ),
         body: temPerguntaSelecionada
-            ? Column(
-                children: [
-                  Questao(_perguntas[_perguntaSelecionada]['texto'] as String),
-
-                  // cria os botões de respostas
-                  ...(_perguntas[_perguntaSelecionada]['respostas']
-                          as List<String>)
-                      .map((resposta) {
-                        return Resposta(resposta, _responder);
-                      })
-                      .toList(),
-                ],
-              )
+            ? Questionario(perguntas: _perguntas,
+            perguntaSelecionada: _perguntaSelecionada,
+            quandoresponder: _responder)
             : Resultado()
       ),
     );

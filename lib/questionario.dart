@@ -26,9 +26,8 @@ class Questionario extends StatelessWidget {
 
         // cria os botões de respostas
         ...(perguntas[perguntaSelecionada]['respostas']
-        as List<String>)
-            .map((resposta) {
-          return Resposta(resposta, quandoresponder);
+        as List<String>).map((resposta) {
+          return Resposta(resposta['texto'] as String, quandoresponder);
         })
             .toList(),
       ],

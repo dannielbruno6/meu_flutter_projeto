@@ -15,6 +15,7 @@ class MeuApp extends StatefulWidget {
 
 class _MeuAppState extends State<MeuApp> {
   int _perguntaSelecionada = 0;
+  int _pontuacaototal = 0;
 
   final _perguntas = const [
     {
@@ -50,11 +51,12 @@ class _MeuAppState extends State<MeuApp> {
     return _perguntaSelecionada < _perguntas.length;
   }
 
-  void _responder() {
+  void _responder(int pontuacao) {
     setState(() {
       _perguntaSelecionada++;
+      _pontuacaototal += pontuacao;
     });
-    print(_perguntaSelecionada);
+    print(_pontuacaototal);
   }
 
   @override

@@ -7,7 +7,7 @@ class Questionario extends StatelessWidget {
 
   final List<Map<String, Object>> perguntas ;
   final int perguntaSelecionada;
-  final void Function() quandoresponder;
+  final void Function(int) quandoresponder;
 
     Questionario({
     required this.perguntas,
@@ -26,8 +26,10 @@ class Questionario extends StatelessWidget {
 
         // cria os botões de respostas
         ...(perguntas[perguntaSelecionada]['respostas']
-        as List<String>).map((resposta) {
-          return Resposta(resposta['texto'] as String, quandoresponder);
+        as List<Map<String, Object>>).map((resposta) {
+          return Resposta(
+              resposta['texto'] as String,
+                  () => quandoresponder(resposta['pontuacao'] as int));
         })
             .toList(),
       ],

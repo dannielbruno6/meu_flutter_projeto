@@ -33,7 +33,7 @@ class _MeuAppState extends State<MeuApp> {
   {'texto': 'gato', 'pontuacao': 10},
   {'texto': 'cachorro', 'pontuacao': 8},
   {'texto': 'zebra', 'pontuacao': 4},
-  {'texto': 'leao', 'pontuacao': 7},
+  {'texto': 'leao', 'pontuacao': 3},
 ]
     },
     {
@@ -47,6 +47,12 @@ class _MeuAppState extends State<MeuApp> {
     },
   ];
 
+    void reiniciarQuestionario() {
+      setState(() {
+        _perguntaSelecionada = 0;
+        _pontuacaototal = 0;
+      });
+    }
   bool get temPerguntaSelecionada {
     return _perguntaSelecionada < _perguntas.length;
   }
@@ -74,7 +80,7 @@ class _MeuAppState extends State<MeuApp> {
                 perguntaSelecionada: _perguntaSelecionada,
                 quandoresponder: _responder,
               )
-            : Resultado(),
+            : Resultado(_pontuacaototal,reiniciarQuestionario),
       ),
     );
   }
